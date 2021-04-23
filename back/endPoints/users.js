@@ -129,15 +129,23 @@ router.post('/autorization', async (req, res) => {
 router.get('datesOfBirths', async (req, res) => {
     let users = await mongoUser.find().exec()
     const currentDate = new Date.now()
+    let currentDay = currentDate.getDate() + currentDate.getMonth() * 31
     users.forEach(user => {
         user.Birthday = new Date(user.Birthday)
+        user.Birthday = new Date(currentDate.getFullYear, user.Birthday.getMonth, user.Birthday.getDate)
+
+        let momentDay = user.Birthday.getDate() + user.Birthday.getMonth() * 31
+        user.daysToBirthday = momentDay - currentDay
     })
 
-    users.forEach(user => {
-        user.Birthday = new Date(currentDate.getFullYear, user.Birthday.getMonth, user.Birthday.getDate)
-        console.log(user.Birthday)
-    })
+    sortByDateOfBirth(users)
+
+    res.status(200).json(users)
 })
+
+function sortByDateOfBirth(arr) {
+    arr.sort((a, b) => a.daysToBirthday > b.daysToBirthday ? 1 : -1);
+}
 
 function delBadFile(fileName) {
     fs.unlinkSync(tmpDir + '/' + fileName)
