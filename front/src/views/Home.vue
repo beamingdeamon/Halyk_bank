@@ -1,17 +1,19 @@
 <template>
   <div>
     <Header/>
+    <Banners />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import Header from '@/components/Header.vue'
+import Banners from '../components/Banners'
 
 export default {
   name: 'Home',
   components: {
-    Header
+    Header,
+    Banners
   }
 }
 </script>
