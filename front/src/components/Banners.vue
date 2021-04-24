@@ -31,6 +31,7 @@ export default {
     mounted(){
         var swiper = new Swiper('.swiper-container', {
             spaceBetween: 30,
+            effect: 'fade',
             centeredSlides: true,
             autoplay: {
                 delay: 3000,

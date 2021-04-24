@@ -1,6 +1,8 @@
 <template>
-  <div class="wrapper">
-    <img src="../assets/header_logo.png" class="logo">
+  <div class="wrapper2">
+    <router-link to='/'>
+      <img src="../assets/header_logo.png" class="logo">
+    </router-link>
     <div class="left_side">
       <div class="search_icon_box">
         <img src="../assets/search_icon.svg" class="search_icon" />
@@ -36,8 +38,8 @@ export default {
 </script>
 
 <style scoped lang="sass">
- .wrapper
-   width: 100vw
+ .wrapper2
+   width: 100%
    height: 10vh
    display: flex
    flex-direction: row
@@ -45,6 +47,7 @@ export default {
    justify-content: center
    background-color: white
    font-family: 'Ubuntu', sans-serif
+   overflow: hidden
    .left_side
      display: flex
      flex-direction: row
@@ -53,8 +56,7 @@ export default {
      max-width: 200px
    .logo
      width: 130px
-     height: 40%
-     margin-left: 10px
+     margin-left: 20px
    .search_icon_box
      width: 30px
      height: 100%
@@ -100,7 +102,6 @@ export default {
       height: 8vh
       border-radius: 3vw
      .text_block
-       margin-left: 1.5vw
        text-align: center
      a
        text-decoration: none
