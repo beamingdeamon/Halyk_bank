@@ -1,22 +1,23 @@
 <template>
-    
-  <div class="MainBanner">
-  <!-- Swiper -->
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-        <div class="swiper-slide">Slide 1</div>
-        <div class="swiper-slide">Slide 2</div>
-        <div class="swiper-slide">Slide 3</div>
-        <div class="swiper-slide">Slide 4</div>
-        <div class="swiper-slide">Slide 5</div>
-        <div class="swiper-slide">Slide 6</div>
-        <div class="swiper-slide">Slide 7</div>
-        <div class="swiper-slide">Slide 8</div>
-        <div class="swiper-slide">Slide 9</div>
-        <div class="swiper-slide">Slide 10</div>
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
+  <div class="Banner_wrapper">
+    <div class="MainBanner">
+    <!-- Swiper -->
+      <div class="swiper-container">
+          <div class="swiper-wrapper">
+          <div class="swiper-slide">Slide 1</div>
+          <div class="swiper-slide">Slide 2</div>
+          <div class="swiper-slide">Slide 3</div>
+          <div class="swiper-slide">Slide 4</div>
+          <div class="swiper-slide">Slide 5</div>
+          <div class="swiper-slide">Slide 6</div>
+          <div class="swiper-slide">Slide 7</div>
+          <div class="swiper-slide">Slide 8</div>
+          <div class="swiper-slide">Slide 9</div>
+          <div class="swiper-slide">Slide 10</div>
+          </div>
+          <!-- Add Pagination -->
+          <div class="swiper-pagination"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -51,9 +52,15 @@ export default {
 </script>
 
   <style>
-
+    .Banner_wrapper{
+      width: 850px;
+      background: #fff;
+      height: 225px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .MainBanner {
-      margin-top: 20px;
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
       font-size: 14px;
       color: #000;
@@ -61,7 +68,7 @@ export default {
     }
 
     .swiper-container {
-      width: 300px;
+      width: 550px;
       height: 200px;
 
     }
@@ -69,7 +76,7 @@ export default {
     .swiper-slide {
       text-align: center;
       font-size: 18px;
-      background: #fff;
+      background: grey;
 
       /* Center slide text vertically */
       display: -webkit-box;
@@ -84,5 +91,17 @@ export default {
       -ms-flex-align: center;
       -webkit-align-items: center;
       align-items: center;
+      width: 550px !important;
+    }
+    @media screen and (max-width: 500px) {
+      .swiper-container{
+        width: 300px !important
+      }
+      .swiper-slide{
+        width: 300px !important
+      }
+      .Banner_wrapper{
+        width: 350px !important;
+      }
     }
   </style>

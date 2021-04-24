@@ -4,7 +4,9 @@ import store from '../store/index.js'
 import Home from '../views/Home.vue'
 import Login from '../views/ResponsiveLogRegisterForm.vue'
 import NewsItem from '../views/NewsItem.vue'
-import AdminPanel from '../views/AdminPanel'
+import AdminPanel from '../views/AdminPanel.vue'
+import Nan from '../views/Nan.vue'
+import add_news from '../components/Add_news.vue'
 
 Vue.use(VueRouter)
 
@@ -28,6 +30,16 @@ const routes = [
     name: 'AdminPanel',
     path: '/adminPanel',
     component: AdminPanel
+  },
+  {
+    name: 'Nan',
+    path: '/nan',
+    component: Nan
+  },
+  {
+    name: 'add_news',
+    path: '/addnews',
+    component: add_news
   }
 ]
 
