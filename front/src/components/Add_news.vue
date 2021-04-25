@@ -5,7 +5,7 @@
             <label class="imgLabel" for="actual-btn">Выберите фото</label>
             <span id="file-chosen">Фото не выбрано</span>
 
-            <input class="inputTitle" type="text" placeholder="Введите заголовок">
+            <input class="inputTitle" type="text" placeholder="Введите заголовок" v-model="newsTitle">
             <button id='btn' @click="par_add">Добавить абзац</button>
             <div id="paragraphs"></div>
             <button class="success" @click="successClick">Опубликовать</button>
@@ -49,9 +49,14 @@ export default {
                     axiosPars.push(paragraphs[key].value.trim())
                 }
             }
-            console.log(axiosPars);
-            axios.post('/user', {
-                title: this.title
+            const formData = new FormData()
+            formData.append('NewsPhoto', this.image)
+            formData.append('title', this.newsTitle)
+            formData.append('paragraphs', axiosPars)
+            axios.post('http://82.146.45.20/api/user/upload_photo', formData, {
+                headers: {
+                'Content-Type': 'multipart/form-data'
+                }
             })
             .then(function (response) {
                 console.log(response);

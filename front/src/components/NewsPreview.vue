@@ -1,7 +1,9 @@
 <template>
   <div>
     <Header/>
-    <TiltCard />
+    <div class="HomeBlock">
+      <TiltCard v-for="(newsItem, i) in News" :key='i' :id='newsItem.id' />
+    </div>
   </div>
 </template>
 
@@ -12,9 +14,24 @@ export default {
   name: 'Home',
   components: {
     TiltCard
+  },
+  data(){
+    return{
+      News: null
+    }
   }
 }
 </script>
 
-<style lang="sass" scoped>
+<style scoped>
+.HomeBlock {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 </style>

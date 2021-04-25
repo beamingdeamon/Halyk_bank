@@ -9,32 +9,11 @@
             </div>
             <div class="formBx">
               <form>
-                <h2>Sign In</h2>
-                <input type="text" placeholder="Login" v-model="login" />
-                <input type="password" v-model="password" placeholder="Password" />
-                <input type="submit" value="Login" @click.prevent="SignUp" />
-                <div class="signup">
-                  Don`t have an account?
-                  <div @click="toggleForm">Sign Up.</div>
-                </div>
+                <h2>Войти</h2>
+                <input type="text" placeholder="логин" v-model="login" />
+                <input type="password" v-model="password" placeholder="пароль" />
+                <input type="submit" value="Войти" @click.prevent="SignUp" />
               </form>
-            </div>
-          </div>
-          <div class="user signupBx">
-            <div class="formBx">
-              <form>
-                <h2>Create an Account</h2>
-                <input type="text" placeholder="Login" v-model="login" />
-                <input type="password" v-model="password" placeholder="Create Password" />
-                <input type="submit" value="Sign Up" @click.prevent="SignIn" />
-                <div class="signup">
-                  Already have an account?
-                  <div @click="toggleForm">Sign In.</div>
-                </div>
-              </form>
-            </div>
-            <div class="imgBx">
-              <!-- <img src="../assets/ResponsiveLogRegisterFormAssets/photo2.jpg" /> -->
             </div>
           </div>
         </div>
@@ -61,7 +40,7 @@ export default {
       var container = document.querySelector(".container");
       container.classList.toggle("active");
     },
-    SignIn(){
+    SignUp(){
         if(this.password.trim().length > 0 && this.login.trim().length > 0){
           axios.post('/API', {
             login: 'LOGIN',
@@ -70,7 +49,7 @@ export default {
           .then(function (response) {
             if(response.data.success == true){
               Swal.fire(
-                'Success!',
+                'success',
                 'Успех!',
                 'Вы вошли в свой аккаунт'
               )
@@ -98,43 +77,6 @@ export default {
           })
         }
     },
-    SignUp(){
-        if(this.password.trim().length > 0 && this.login.trim().length > 0){
-          axios.post('/API', {
-            login: 'LOGIN',
-            password: 'PASSWORD'
-          })
-          .then(function (response) {
-            if(response.data.success == true){
-              Swal.fire(
-                'Success!',
-                'Успех!',
-                'Вы вошли в свой аккаунт'
-              )
-              this.$store.commit('login', response.data.name)
-            } else {
-              Swal.fire({
-                icon: 'error',
-                title: 'Ошибка!',
-                text: 'Такого пользователя не существует!',
-              })
-            }
-          })
-          .catch(function (error) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Ошибка!',
-              text: 'Непредвиденная ошибка!',
-            })
-          });
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Ошибка!',
-            text: 'Введите пароль и логин!',
-          })
-        }
-    }
   },
 };
 </script>
@@ -252,38 +194,6 @@ export default {
   color: #677eff;
   display: inline-block;
   cursor: pointer;
-}
-.section .container .signupBx {
-  pointer-events: none;
-}
-.section .container.active .signupBx {
-  pointer-events: initial;
-}
-
-.section .container .signupBx .formBx {
-  left: 100%;
-}
-.section .container.active .signupBx .formBx {
-  left: 0;
-}
-.section .container .signupBx .imgBx {
-  transform: translateX(-200%);
-}
-.section .container.active .signupBx .imgBx {
-  transform: translateX(0);
-}
-
-.section .container .signinBx .formBx {
-  left: 0;
-}
-.section .container.active .signinBx .formBx {
-  left: 100%;
-}
-.section .container .signinBx .imgBx {
-  transform: translateX(0);
-}
-.section .container.active .signinBx .imgBx {
-  transform: translateX(-200%);
 }
 
 @media (max-width: 5000px) {

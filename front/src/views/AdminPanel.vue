@@ -1,16 +1,17 @@
 <template>
   <div>
     <Header />
-    <div class="wrapper">
+    <div class="wrapper" v-if="IsAdmin!='ADMIN'">
       <div class="left_block">
         Функции Админ панели:<br>
         <span>1. <router-link to='/addnews'>Добавить новость</router-link></span>
-        <span>2. <router-link to="/addnews">Добавить вакансию</router-link></span>
-        <span>3. <router-link to="/addnews">Повысить сотрудника</router-link></span>
-        <span>4. <router-link to="/addnews">Отправить всем сотрудникам уведомление</router-link></span>
+        <span>2. <router-link to="/nan">Добавить вакансию</router-link></span>
+        <span>3. <router-link to="/nan">Повысить сотрудника</router-link></span>
+        <span style="margin-bottom: 20px">4. <router-link to="/nan">Отправить всем сотрудникам уведомление</router-link></span>
       </div>
       <div class="right_block"><registration /></div>
     </div>
+    <div class="wrapper" style="font-size: 2rem" v-else>Вы не являетесь админом</div>
   </div>
 </template>
 
@@ -22,6 +23,11 @@ export default {
   components:{
     registration,
     Header
+  },
+  computed:{
+    IsAdmin(){
+      return this.$store.state.name
+    }
   }
 }
 </script>

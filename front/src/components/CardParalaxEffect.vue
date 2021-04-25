@@ -1,88 +1,67 @@
 <template>
   <div class="home">
-    <div class="HomeBlock">
-      <router-link to='/newsItem/1' class="cardP" v-tilt>
-        <div class="card-image"></div>
+      <router-link :to='`/newsItem/${id}`' class="cardP" v-tilt>
+        <div class="card-image"><img src="" alt="Фото новости"></div>
         <div class="card-text">
           <span class="date">4 days ago</span>
-          <h2>News One</h2>
+          <h2>{{newsTitle}}</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur, Ducimus, repudiandae
-            temporibus omnis illum maxime quod deserunt eligendi dolor
+            {{newsTexts[0].substr(0, 20)}}...
           </p>
         </div>
         <div class="card-stats">
           <div class="stat">
-            <div class="value">4<sup>m</sup></div>
+            <div class="value">{{Math.random() * 10}}<sup>m</sup></div>
             <div class="type">read</div>
           </div>
           <div class="stat border">
-            <div class="value">5123</div>
+            <div class="value">{{Math.random() * 10000}}</div>
             <div class="type">views</div>
           </div>
           <div class="stat">
-            <div class="value">32</div>
+            <div class="value">{{Math.random() * 100}}</div>
             <div class="type">comments</div>
           </div>
         </div>
       </router-link>
-      <router-link to='/newsItem/2' class="cardP" v-tilt>
-        <div class="card-image card2"></div>
-        <div class="card-text card2">
-          <span class="date">1 week ago</span>
-          <h2>News Two</h2>
-          <p>
-            Adipisicing elit. Ducimus, repudiandae corrupti amet temporibus
-            omnis provident illum maxime quod. Lorem ipsum dolor
-          </p>
-        </div>
-        <div class="card-stats card2">
-          <div class="stat">
-            <div class="value">7<sup>m</sup></div>
-            <div class="type">read</div>
-          </div>
-          <div class="stat border">
-            <div class="value">7152</div>
-            <div class="type">views</div>
-          </div>
-          <div class="stat">
-            <div class="value">21</div>
-            <div class="type">comments</div>
-          </div>
-        </div>
-      </router-link>
-      <router-link to='/newsItem/3' class="cardP" v-tilt>
-        <div class="card-image card3"></div>
-        <div class="card-text card3">
-          <span class="date">3 week ago</span>
-          <h2>News Three</h2>
-          <p>
-            Repudiandae corrupti amet temporibus omnis provident illum maxime.
-            Ducimus, lorem ipsum dolor adipisicing elit
-          </p>
-        </div>
-        <div class="card-stats card3">
-          <div class="stat">
-            <div class="value">5<sup>m</sup></div>
-            <div class="type">read</div>
-          </div>
-          <div class="stat border">
-            <div class="value">3021</div>
-            <div class="type">views</div>
-          </div>
-          <div class="stat">
-            <div class="value">15</div>
-            <div class="type">comments</div>
-          </div>
-        </div>
-      </router-link>
-    </div>
   </div>
 </template>
 <script>
 export default {
   name: "Home",
-  mounted() {},
+  data(){
+    return{
+      newsTitle: '',
+      newsTexts: ''
+    }
+  },
+  beforeMount() {
+    axios.get('/user', {
+        params: {
+            ID: this.id
+        }
+    })
+    .then(function (response) {
+        console.log(response);
+        this.newsTitle = response.data.newsTitle
+        this.newsTexts = response.data.newsTexts
+        var reader = new FileReader();
+        var preview = document.getElementById('NewPhoto')
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+        reader.readAsDataURL(response.data.img);
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
+    .then(function () {
+        // always executed
+    });
+  },
+  props:{
+    id: Number
+  }
 };
 </script>
 
@@ -90,17 +69,6 @@ export default {
 
 a{
   text-decoration: none;
-}
-
-.HomeBlock {
-  width: 100%;
-  min-height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
 }
 .cardP {
   display: grid;
@@ -120,10 +88,13 @@ a{
 }
 .card-image {
   grid-area: image;
-  background: url("../assets/CardParalaxEffectAssets/img1.jpg");
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  background-size: cover;
+}
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .card-text {
   grid-area: text;

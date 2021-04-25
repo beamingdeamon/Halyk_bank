@@ -8,12 +8,12 @@
       </div>
       <!-- блок с вакансиями. Логику потом напишем после бека, еще я заебался поэтому не буду внутри расписывать -->
       <div class="karier_block">
-        <div class="karier_item">nmnmnm</div>
-        <div class="karier_item"></div>
-        <div class="karier_item"></div>
-        <div class="karier_item"></div>
-        <div class="karier_item"></div>
-        <div class="karier_item"></div>
+        <div class="karier_item">Вакансия1</div>
+        <div class="karier_item">Вакансия2</div>
+        <div class="karier_item">Вакансия3</div>
+        <div class="karier_item">Вакансия4</div>
+        <div class="karier_item">Вакансия5</div>
+        <div class="karier_item">Вакансия6</div>
       </div>
 
       <hr>
@@ -89,7 +89,9 @@ export default {
           margin-left: 1vh
           margin-top: 0.7vh
           border: 1px solid grey
-          align-self: center
+          display: flex
+          align-items: center
+          justify-content: center
           width: 140px
           height: 75px
       .rising
@@ -114,6 +116,7 @@ export default {
           margin-top: 0.7vh
           font-size: 2.2vh
           color: rgb(58, 58, 58)
+          text-align: center
     .right_block
       background-color: white
       width: 58%
