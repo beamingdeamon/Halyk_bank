@@ -3,7 +3,7 @@
     <div class="error_block">
       Этот сервис разработке<br><br>
       Он будет добавлен чуть позже
-      <a href="/">Вернуться</a>
+      <router-link to="/">Вернуться</router-link>
     </div>
   </div>
 </template>
@@ -34,11 +34,10 @@ export default {
       a
         margin-top: 3vh
         border: 1px solid grey
-        width: 150px
-        height: 40px
+        padding: 5px 10px 5px 10px
         text-decoration: none
         color: rgb(58, 58, 58)
-        border-radius: 6%
+        border-radius: 10px
       a:active
         color: rgb(58, 58, 58)
       a:hover

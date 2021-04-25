@@ -41,5 +41,12 @@ export default {
     margin-right: 10px
     justify-content: space-around
     .middle_block
-      height: 86vh
+      min-height: 86vh
+      display: flex
+      flex-wrap: wrap
+      flex-direction: row
+      HR
+        width: 40%
+      NewsPreview
+        width: 40%
 </style>

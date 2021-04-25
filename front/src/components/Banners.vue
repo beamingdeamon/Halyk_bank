@@ -32,7 +32,6 @@ export default {
     mounted(){
         var swiper = new Swiper('.swiper-container', {
             spaceBetween: 30,
-            effect: 'fade',
             centeredSlides: true,
             autoplay: {
                 delay: 3000,
@@ -53,9 +52,9 @@ export default {
 
   <style>
     .Banner_wrapper{
-      width: 850px;
+      width: 97vw;
       background: #fff;
-      height: 225px;
+      height: 270px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -65,12 +64,19 @@ export default {
       font-size: 14px;
       color: #000;
       padding: 0;
+      width: 100%;
+      height: 200px;
+      margin-top: 50px;
     }
 
     .swiper-container {
-      width: 550px;
+      width: 500px;
       height: 200px;
-
+    }
+    @media (max-width: 500px) {
+      .swiper-container{
+        width: 300px;
+      }
     }
 
     .swiper-slide {
@@ -91,17 +97,17 @@ export default {
       -ms-flex-align: center;
       -webkit-align-items: center;
       align-items: center;
-      width: 550px !important;
+      width: 500px
     }
     @media screen and (max-width: 500px) {
       .swiper-container{
-        width: 300px !important
+        width: 300px;
       }
       .swiper-slide{
-        width: 300px !important
+        width: 300px;
       }
       .Banner_wrapper{
-        width: 350px !important;
+        width: 350px;
       }
     }
   </style>

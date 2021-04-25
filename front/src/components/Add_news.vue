@@ -9,7 +9,7 @@
             <button id='btn' @click="par_add">Добавить абзац</button>
             <div id="paragraphs"></div>
             <button class="success" @click="successClick">Опубликовать</button>
-            <a href="/adminPanel" class="go_away">Вернуться</a>
+            <router-link to="/adminPanel" class="go_away">Вернуться</router-link>
         </div>
     </div>
 </template>
@@ -141,8 +141,7 @@ export default {
 }
 .go_away{
     text-align: center;
-    width: 8vw;
-    height: 4vh;
+    padding: 5px 10px 5px 10px;
     font-size: 3.5vh;
     border: 1px solid grey;
     border-radius: 3vh;

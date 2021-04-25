@@ -1,6 +1,6 @@
 <template>
   <div class="register_wrapper">
-    <div class="title">Регистрация</div>
+    <div class="title">Регистрация пользователя</div>
     <span>Введите Логин</span>
     <input type="text">
     <span>Введите Фамилию</span>
@@ -13,7 +13,7 @@
     <input type="text">
     <span>Введите Пароль</span>
     <input type="text">
-    <button type="submit">Регистрировать</button>
+    <button type="submit">Зарегистрировать</button>
     <!-- Тут логику напиши, на беке уже есть регистрация, если что к димашу обращайся -->
   </div>
 </template>
@@ -38,4 +38,5 @@ export default {
       margin-top: 3vh
     button
       margin-top: 2vh
+      margin-bottom: 2vh
 </style>
