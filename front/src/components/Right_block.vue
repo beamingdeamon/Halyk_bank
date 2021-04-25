@@ -1,40 +1,47 @@
 <template>
   <div class="wrapper">
     <div class="navigation2">
-                <ul>
-                    <li>
-                        <a href="/blog">+ Halyk Blog</a>
-                    </li>
-                    <li>
-                        <a href="/nan">+ Halyk Start</a>
-                    </li>
-                    <li>
-                        <a href="/nan">+ Halyk Жаналык</a>
-                    </li>
-                    <li>
-                        <a href="/nan">+ Halyk Book</a>
-                    </li>
-                    <li>
-                        <a href="/nan">+ Halyk Сервисы</a>
-                    </li>
-                    <li>
-                      <a href="/nan">+ Обучение</a>
-                    </li>
-                    <li>
-                      <a href="/nan">+ Афиша</a>
-                    </li>
-                    <li>
-                      <div class="number">
-                        Телефон доверия<br>
-                        8 (777)-777-77-77
-                      </div>
-                    </li>
-                </ul>
+        <div class="apinion">
+            <img src="../assets/apinion.png">Мнение
+        </div>
+        <div class="apinion_block">
+            <div class="apinion_item">
+                <img src="../assets/user_logo.jpg" class="logo">
+                <div class="text">
+                    <span class="name">Уакыпов Жандос</span><span class="date"> 2 месяца назад</span>
+                    <div class="comment">очень полезная книга сам читаю</div>
+                </div>
             </div>
-            <div class="toggle2" @click="toggle2Menu">
-                <v-icon class = 'mainT' style="color: black" name="menu"></v-icon>
-                <v-icon class = 'pasT' style="color: black" name="x"></v-icon>
+            <div class="apinion_item">
+                <img src="../assets/user_logo.jpg" class="logo">
+                <div class="text">
+                    <span class="name">Уакыпов Жандос</span><span class="date"> 2 месяца назад</span>
+                    <div class="comment">очень полезная книга сам читаю</div>
+                </div>
             </div>
+            <div class="apinion_item">
+                <img src="../assets/user_logo.jpg" class="logo">
+                <div class="text">
+                    <span class="name">Уакыпов Жандос</span><span class="date"> 2 месяца назад</span>
+                    <div class="comment">очень полезная книга сам читаю</div>
+                </div>
+            </div>
+        </div>
+        <div class="birthday">
+            <img src="../assets/birthday.png"> Туган Кунымен!!!!
+        </div>
+        <div class="birthday_block">
+            <span>Нурсипова Алия, главный менеджер</span>
+            <span>Нурсипова Алия, главный менеджер</span>
+            <span>Нурсипова Алия, главный менеджер</span>
+            <span>Нурсипова Алия, главный менеджер</span>
+            <span>Нурсипова Алия, главный менеджер</span> <!-- У user есть post это дожность -->
+        </div>
+    </div>
+        <div class="toggle2" @click="toggle2Menu">
+            <v-icon class = 'mainT' style="color: black" name="menu"></v-icon>
+            <v-icon class = 'pasT' style="color: black" name="x"></v-icon>
+        </div>
   </div>
 </template>
 
@@ -59,36 +66,57 @@ export default {
     min-height: 86vh
     background-color: white
     font-family: 'Roboto', sans-serif
+    color: white
     font-size: 2.5vh
     display: flex
     flex-direction: column
     align-items: center
-    .services
-      margin-top: 3vh
-      width: 80%
-      height: 55%
-      display: flex
-      flex-direction: column
-      justify-content: space-around
-      a
-        text-decoration: none
-        color: rgb(58, 58, 58)
-      a:active
-        color: rgb(58, 58, 58)
-      a:hover
-        color: rgb(161, 161, 161)
-    .number
-      margin-top: 2vh
-      border: 1px solid grey
-      border-radius: 6%
-      width: 90%
-      margin-left: 5%
-      height: 60px;
-      display: flex
-      align-items: center
-      justify-content: center
-      color: white
-      white-space: nowrap
+    .navigation2
+        .apinion
+            display: flex
+            flex-direction: row
+            align-items: center
+            color: white
+            margin-left: 6vh
+            font-size: 3vh
+            img
+                width: 40px
+        .apinion_block
+            margin-top: 4vh
+            height: 35%
+            .apinion_item
+                height: 33%
+                display: flex
+                flex-direction: row
+                .logo
+                    width: 80px
+                    height: 80px
+                    border-radius: 50%
+                .text
+                    display: flex
+                    flex-direction: column
+                    .date
+                        color: black
+                        font-size: 1.8vh
+                    .comment
+                        font-size: 2vh
+        .birthday
+            display: flex
+            flex-direction: row
+            align-items: center
+            color: white
+            margin-left: 2vh
+            font-size: 3vh
+            img
+                width: 40px
+        .birthday_block
+            height: 30vh
+            display: flex
+            flex-direction: column
+            font-size: 2.2vh
+            justify-content: space-around
+            span
+                margin-left: 1vh
 </style>
 
 <style scoped>
