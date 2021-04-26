@@ -1,0 +1,69 @@
+// Articles
+
+/*
+Пример создания статьи:
+тип запроса: POST
+строка запроса: http://localhost:3000/articles
+
+пример запроса:
+{
+  "title": String,
+  "paragraphs": Array,
+  "file": file
+}
+Важно !!!!!!
+1. название свойства обьекта formData должно быть обязательно file
+пример: formData.append('file', this.file)
+2. с formData есть большая проблема он преобразует все данные в String
+поэтому когда ты отправляешь массив стрингов на бэк мне это приходит в виде
+одной длинной строки и в итоге длина массива на бэке 1 т.е он склеивает все параграфы в одну строку
+и разделяет их просто запятой,
+я их разделяю снова на массив по запятым, но если в параграфах должны быть и другие запятые
+будет проблема если что придумай свой символ разделитель и впиши его здесь:
+back/endPoints/articles.js 33 строка split функция
+3. еще я сделал тестовую версию фронта из говна и палок для создания статей в папке doc/Test.vue
+*/
+
+/*
+Получение картинки на фронте:
+тип запроса: GET
+строка запроса: http://localhost:3000/aticles/load/:articleID
+
+примеры:
+<div class="imageBlock" :style="{'background': 'url(' + article.imagePath  + ') center no-repeat', 'background-size': 'cover'}">
+или так
+<img :src="article.imagePath" />
+*/
+
+/*
+получение всех статей
+тип запроса: GET
+строка запроса: http://localhost:3000/aticles
+
+возвращает массив статей
+
+[
+  {
+    "title": "Test",
+    "paragraphs": [
+      "asnxkjansx hsgdvjhbkashjx",
+      "asnxkjansx hsgdvjhbkashjx",
+      "asnxkjansx hsgdvjhbkashjx",
+      "asnxkjansx hsgdvjhbkashjx",
+      "asnxkjansx hsgdvjhbkashjx"
+    ],
+    "imageSystemPath": "/Users/dimash/Documents/GitHub/Halyk_bank/back/endPoints/tmp/image608615735150014f4edddae8item1.jpeg",
+    "imagePath": "http://localhost:3000/articles/load/608615735150014f4edddae8",
+    "_id": "608615735150014f4edddae8",
+    "__v": 0
+  }
+]
+*/
+
+
+/*
+Поиск статьи по id
+тип запроса: GET
+строка запроса: http://localhost:3000/aticles/find/:id
+возвращает одну статью
+*/

@@ -4,62 +4,23 @@ const router = express.Router()
 const mongoUser = require('../models/User.js').mongoUser
 const Password = require('../objects/Password.js')
 const Login = require('../objects/Login.js')
-const multer = require('multer')
-const fs = require('fs')
-
-const tmpDir = __dirname + '/tmp/'
-const uploadDir = __dirname + '/uploads/'
-const upload = multer({dest: './endPoints/tmp/'})
 
 router.get('/', async (req, res) => {
     const result = await mongoUser.find().exec()
     res.status(200).send( JSON.stringify(result) )
 })
 
-router.post('/', upload.single('avatar'), async (req, res) => {
+// begin registration user
+router.post('/', async (req, res) => {
     try {
-        const avatar = data.avatar
         const data = req.body
 
-        const validTypes = ['svg+xml', 'png', 'gif', 'jpeg']
-
-        const fileType = avatar.mimetype.split('/')
-
-        const image = null
-
-        if (avatar.size > 1000000) {
-            delBadFile(avatar.filename)
-            res.status(500).json({
-                type: 'error',
-                message: 'Файл слишком большой'
-            })
-        }
-        if (fileType[0] !== 'image') {
-            delBadFile(avatar.filename)
-            res.status(500).json({
-                type: 'error',
-                message: 'Загружать можно только изображения'
-            })
-        }
-        if (validTypes.includes(fileType[1])) {
-            fs.renameSync(tmpDir + avatar.filename, uploadDir + 'avatar' + avatar.originalname)
-            image = uploadDir + 'avatar' + avatar.originalname
-        } else {
-            delBadFile(avatar.filename)
-            res.status(500).json({
-                type: 'error',
-                message: 'недопустимый формат изображения'
-            })
-        }
-
         const newUser = new mongoUser({
-            Login: new Login(data.login),
+            Login: new Login(data.iin),
             Password: new Password(data.password),
             FirstName: data.firstName,
             LastName: data.lastName,
-            Image: image,
-            Post: data.post,
-            Birthday: new Date(data.birthday)
+            PhoneNumber: data.phoneNumber
         })
         const result = await newUser.save()
         res.status(200).send( JSON.stringify( result ) )
@@ -70,6 +31,23 @@ router.post('/', upload.single('avatar'), async (req, res) => {
     }
 })
 
+/*
+TEST:
+POST http://localhost:3000/users/ HTTP/1.1
+content-type: application/json
+
+{
+    "iin": "020214500042",
+    "password": "password",
+    "firstName": "Dimash",
+    "lastName": "Kenzhegaliev",
+    "phoneNumber": "+77055539966"
+}
+*/
+// end Registration User
+
+
+// begin find user by id
 router.get('/id/:id', async (req, res) => {
     try {
         const result = await mongoUser.findById(req.params.id).exec()
@@ -80,23 +58,40 @@ router.get('/id/:id', async (req, res) => {
     }
 })
 
-router.get('/login/:login', async (req, res) => {
+/*
+TEST:
+get http://localhost:3000/users/id/6086027174b9991f6cf203a9 HTTP/1.1
+content-type: application/json
+*/
+// end find user by id
+
+
+// begin find by iin
+router.get('/iin/:iin', async (req, res) => {
     try {
-        const result = await mongoUser.findOne({'Login._login': req.params.login}).exec()
+        const result = await mongoUser.findOne({'Login._login': req.params.iin}).exec()
         res.status(200).json(result)
     }
     catch(err) {
         res.sendStatus(500)
     }
 })
+/*
+TEST:
+get http://localhost:3000/users/iin/020214500042 HTTP/1.1
+content-type: application/json
+*/
+// end find by iin
 
+
+// begin find by name
 router.post('/name', async (req, res) => {
     try {
         const data = req.body
         let result
 
         if (data.firstName && data.lastName) {
-            result = await mongoUser.findOne({'FirstName': data.FirstName, 'LastName': data.lastName})
+            result = await mongoUser.findOne({'FirstName': data.firstName, 'LastName': data.lastName}).exec()
         }
         else if (data.firstName) {
             result = await mongoUser.find({'FirstName': data.firstName}).exec()
@@ -112,11 +107,25 @@ router.post('/name', async (req, res) => {
     }
 })
 
+/*
+TEST:
+POST http://localhost:3000/users/name/ HTTP/1.1
+content-type: application/json
+
+{
+    "lastName": "Kenzhegaliev"
+}
+*/
+// end find by name
+
+
+// begin autorization
 router.post('/autorization', async (req, res) => {
     try {
         const data = req.body
-        const user = await mongoUser.findOne({'Login._login': data.login}).exec()
-        const result = Password.passwordVerify(data.password)
+        let user = await mongoUser.findOne({'Login._login': data.iin}).exec()
+        user.Password = new Password(user.Password._password)
+        const result = user.Password.passwordVerify(data.password)
         if (!result) res.sendStatus(500)
         res.status(200).send(user)
     }
@@ -126,6 +135,20 @@ router.post('/autorization', async (req, res) => {
     }
 })
 
+/*
+TEST:
+POST http://localhost:3000/users/autorization/ HTTP/1.1
+content-type: application/json
+
+{
+    "iin": "020214500042",
+    "password": "password"
+}
+*/
+// end auttorization
+
+
+// not using
 router.get('datesOfBirths', async (req, res) => {
     let users = await mongoUser.find().exec()
     const currentDate = new Date.now()
@@ -145,10 +168,6 @@ router.get('datesOfBirths', async (req, res) => {
 
 function sortByDateOfBirth(arr) {
     arr.sort((a, b) => a.daysToBirthday > b.daysToBirthday ? 1 : -1);
-}
-
-function delBadFile(fileName) {
-    fs.unlinkSync(tmpDir + '/' + fileName)
 }
 
 module.exports = router

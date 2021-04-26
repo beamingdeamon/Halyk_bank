@@ -24,6 +24,7 @@ class Password{
     }
 
     newPasswordValid (password) {
+        console.log(password)
         return password.length >= 6 && password.length <= 512
     }
 

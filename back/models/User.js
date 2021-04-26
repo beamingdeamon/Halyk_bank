@@ -17,17 +17,9 @@ const user = new mongoose.Schema({
         type: String,
         default: ''
     },
-    Image: {
-        type: Object,
-        default: {}
-    },
-    Post: {
+    PhoneNumber: {
         type: String,
         default: ''
-    },
-    Birthday: {
-        type: Date,
-        default: Date.now()
     }
 })
 

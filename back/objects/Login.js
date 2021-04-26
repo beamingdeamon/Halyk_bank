@@ -1,6 +1,7 @@
 module.exports =
 class Login {
     constructor(login) {
+        console.log(login)
         if (this.newLoginValid(login))
             this._login = login
         else return new Error('bad login')
